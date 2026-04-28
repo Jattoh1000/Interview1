@@ -483,42 +483,114 @@
   </div>
 </footer>
 
-<script>
-  // page navigation logic
-  const pages = {
-    home: document.getElementById('home-page'),
-    about: document.getElementById('about-page'),
-    services: document.getElementById('services-page'),
-    contact: document.getElementById('contact-page')
-  };
-  
-  const navLinks = document.querySelectorAll('.nav-link');
-  
-  function setActivePage(pageId) {
-    // hide all pages
-    Object.values(pages).forEach(page => {
-      if(page) page.classList.remove('active-page');
-    });
-    const activePage = pages[pageId];
-    if(activePage) activePage.classList.add('active-page');
-    
-    // update active class on nav links
-    navLinks.forEach(link => {
-      const linkPage = link.getAttribute('data-nav');
-      if(linkPage === pageId) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-    
-    // update browser hash without jumping
-    history.pushState(null, '', `#${pageId}`);
-  }
-  
-  function handleNavClick(e) {
-    e.preventDefault();
-    const pageId = this.getAttribute('data-nav');
-    if(pageId && pages[pageId]) {
-      setActivePage(pageId);
-      window.scrollTo(
+‎<script>
+‎  // page navigation logic
+‎  const pages = {
+‎    home: document.getElementById('home-page'),
+‎    about: document.getElementById('about-page'),
+‎    services: document.getElementById('services-page'),
+‎    contact: document.getElementById('contact-page')
+‎  };
+‎  
+‎  const navLinks = document.querySelectorAll('.nav-link');
+‎  
+‎  function setActivePage(pageId) {
+‎    // hide all pages
+‎    Object.values(pages).forEach(page => {
+‎      if(page) page.classList.remove('active-page');
+‎    });
+‎    const activePage = pages[pageId];
+‎    if(activePage) activePage.classList.add('active-page');
+‎    
+‎    // update active class on nav links
+‎    navLinks.forEach(link => {
+‎      const linkPage = link.getAttribute('data-nav');
+‎      if(linkPage === pageId) {
+‎        link.classList.add('active');
+‎      } else {
+‎        link.classList.remove('active');
+‎      }
+‎    });
+‎    
+‎    // update browser hash without jumping
+‎    history.pushState(null, '', `#${pageId}`);
+‎  }
+‎  
+‎  function handleNavClick(e) {
+‎    e.preventDefault();
+‎    const pageId = this.getAttribute('data-nav');
+‎    if(pageId && pages[pageId]) {
+‎      setActivePage(pageId);
+‎      window.scrollTo({ top: 0, behavior: 'smooth' });
+‎    }
+‎  }
+‎  
+‎  navLinks.forEach(link => {
+‎    link.addEventListener('click', handleNavClick);
+‎  });
+‎  
+‎  // initial check for hash on load
+‎  function checkHash() {
+‎    const hash = window.location.hash.substring(1);
+‎    if(hash && pages[hash]) {
+‎      setActivePage(hash);
+‎    } else {
+‎      setActivePage('home');
+‎    }
+‎  }
+‎  window.addEventListener('popstate', () => {
+‎    const hash = window.location.hash.substring(1);
+‎    if(hash && pages[hash]) setActivePage(hash);
+‎    else setActivePage('home');
+‎  });
+‎  checkHash();
+‎  
+‎  // Contact form simple handling with modern feedback
+‎  const contactForm = document.getElementById('contactForm');
+‎  const feedback = document.getElementById('formFeedback');
+‎  if(contactForm){
+‎    contactForm.addEventListener('submit', function(e){
+‎      e.preventDefault();
+‎      const name = document.getElementById('name')?.value.trim();
+‎      const email = document.getElementById('email')?.value.trim();
+‎      const message = document.getElementById('message')?.value.trim();
+‎      if(!name || !email || !message){
+‎        feedback.innerHTML = '<span style="color:#b91c1c;">⚠️ Please fill in name, email and message.</span>';
+‎        return;
+‎      }
+‎      if(!email.includes('@') || !email.includes('.')){
+‎        feedback.innerHTML = '<span style="color:#b91c1c;">⚠️ Enter a valid email address.</span>';
+‎        return;
+‎      }
+‎      // simulate submit
+‎      feedback.innerHTML = '<span style="color:#0f3b2c;"><i class="fas fa-spinner fa-pulse"></i> Sending...</span>';
+‎      setTimeout(() => {
+‎        feedback.innerHTML = '<span style="color:#0f3b2c;">✓ Thanks! A CareOne representative will get back to you shortly.</span>';
+‎        contactForm.reset();
+‎        setTimeout(() => { feedback.innerHTML = ''; }, 4000);
+‎      }, 800);
+‎    });
+‎  }
+‎</script>
+‎<style>
+‎  .nav-link.active {
+‎    color: #0f3b2c;
+‎    font-weight: 600;
+‎    border-bottom: 2px solid #0f3b2c;
+‎    padding-bottom: 2px;
+‎  }
+‎  .service-card p, .hero-content p {
+‎    line-height: 1.5;
+‎  }
+‎  a {
+‎    text-decoration: none;
+‎  }
+‎  .btn-primary, .btn-outline {
+‎    transition: all 0.2s ease;
+‎  }
+‎  ::selection {
+‎    background: #cfe6df;
+‎  }
+‎</style>
+‎</body>
+‎</html>
