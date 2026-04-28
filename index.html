@@ -1,596 +1,620 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>CareOne Services Ltd | Integrated Healthcare Solutions</title>
-  <!-- Google Fonts + Shad/CN inspired modern style -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎  <meta charset="UTF-8">
+‎  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+‎  <title>CareOne Services Ltd | Modern Healthcare Solutions</title>
+‎  <!-- Google Fonts Inter + ShadCN Modern vibe -->
+‎  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+‎  <!-- Font Awesome 6 (icons) -->
+‎  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+‎  <style>
+‎    * {
+‎      margin: 0;
+‎      padding: 0;
+‎      box-sizing: border-box;
+‎    }
+‎
+‎    body {
+‎      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+‎      background: #ffffff;
+‎      color: #0a0c10;
+‎      line-height: 1.5;
+‎      scroll-behavior: smooth;
+‎      overflow-x: hidden;
+‎    }
+‎
+‎    /* Shadcn inspired design tokens */
+‎    :root {
+‎      --background: #ffffff;
+‎      --foreground: #0f172a;
+‎      --primary: #0f3b2c;
+‎      --primary-light: #1c5a43;
+‎      --primary-soft: #eaf5f0;
+‎      --secondary: #f1f5f9;
+‎      --secondary-foreground: #1e293b;
+‎      --muted: #f8fafc;
+‎      --muted-foreground: #64748b;
+‎      --accent: #eef2ff;
+‎      --border: #e2e8f0;
+‎      --ring: #0f3b2c;
+‎      --radius: 1rem;
+‎      --radius-sm: 0.75rem;
+‎      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+‎      --shadow-md: 0 10px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.02);
+‎      --shadow-lg: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+‎    }
+‎
+‎    .container {
+‎      max-width: 1280px;
+‎      margin: 0 auto;
+‎      padding: 0 2rem;
+‎    }
+‎
+‎    /* Navigation with glassmorphism */
+‎    .navbar {
+‎      background: rgba(255, 255, 255, 0.92);
+‎      backdrop-filter: blur(12px);
+‎      border-bottom: 1px solid var(--border);
+‎      position: sticky;
+‎      top: 0;
+‎      z-index: 100;
+‎      width: 100%;
+‎      transition: all 0.2s;
+‎    }
+‎
+‎    .nav-inner {
+‎      display: flex;
+‎      align-items: center;
+‎      justify-content: space-between;
+‎      flex-wrap: wrap;
+‎      padding: 1rem 0;
+‎    }
+‎
+‎    .logo {
+‎      font-weight: 800;
+‎      font-size: 1.6rem;
+‎      letter-spacing: -0.02em;
+‎      background: linear-gradient(130deg, #0f3b2c 0%, #2b7a5c 100%);
+‎      background-clip: text;
+‎      -webkit-background-clip: text;
+‎      color: transparent;
+‎    }
+‎    .logo span {
+‎      background: none;
+‎      color: #0f2e21;
+‎      -webkit-background-clip: unset;
+‎    }
+‎
+‎    .nav-links {
+‎      display: flex;
+‎      gap: 2.5rem;
+‎      align-items: center;
+‎    }
+‎    .nav-links a {
+‎      text-decoration: none;
+‎      font-weight: 500;
+‎      color: #1e293b;
+‎      transition: all 0.2s ease;
+‎      font-size: 0.95rem;
+‎      position: relative;
+‎    }
+‎    .nav-links a:after {
+‎      content: '';
+‎      position: absolute;
+‎      width: 0;
+‎      height: 2px;
+‎      bottom: -4px;
+‎      left: 0;
+‎      background-color: var(--primary);
+‎      transition: width 0.25s ease;
+‎    }
+‎    .nav-links a:hover:after, .nav-links a.active:after {
+‎      width: 100%;
+‎    }
+‎    .nav-links a.active {
+‎      color: var(--primary);
+‎      font-weight: 600;
+‎    }
+‎
+‎    /* Buttons */
+‎    .btn-primary {
+‎      display: inline-flex;
+‎      align-items: center;
+‎      gap: 8px;
+‎      background-color: var(--primary);
+‎      color: white;
+‎      border-radius: 9999px;
+‎      padding: 0.65rem 1.5rem;
+‎      font-weight: 500;
+‎      font-size: 0.9rem;
+‎      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+‎      border: none;
+‎      cursor: pointer;
+‎      box-shadow: var(--shadow-sm);
+‎    }
+‎    .btn-primary:hover {
+‎      background-color: #0a2e22;
+‎      transform: translateY(-2px);
+‎      box-shadow: var(--shadow-md);
+‎    }
+‎    .btn-outline {
+‎      background: transparent;
+‎      border: 1px solid var(--border);
+‎      border-radius: 9999px;
+‎      padding: 0.65rem 1.5rem;
+‎      font-weight: 500;
+‎      transition: all 0.2s;
+‎      display: inline-flex;
+‎      align-items: center;
+‎      gap: 8px;
+‎    }
+‎    .btn-outline:hover {
+‎      background: var(--secondary);
+‎      border-color: var(--primary);
+‎      transform: translateY(-1px);
+‎    }
+‎
+‎    /* Page transitions + animations */
+‎    .page {
+‎      display: none;
+‎      opacity: 0;
+‎      transform: translateY(8px);
+‎      transition: opacity 0.35s ease, transform 0.35s ease;
+‎    }
+‎    .page.active-page {
+‎      display: block;
+‎      opacity: 1;
+‎      transform: translateY(0);
+‎      animation: fadeSlideUp 0.45s ease forwards;
+‎    }
+‎    @keyframes fadeSlideUp {
+‎      0% { opacity: 0; transform: translateY(20px); }
+‎      100% { opacity: 1; transform: translateY(0); }
+‎    }
+‎
+‎    /* Hero & Cards */
+‎    .hero {
+‎      padding: 5rem 0 4rem;
+‎      background: linear-gradient(145deg, #ffffff 0%, #fafcff 100%);
+‎    }
+‎    .hero-content h1 {
+‎      font-size: 3.5rem;
+‎      font-weight: 800;
+‎      letter-spacing: -0.03em;
+‎      line-height: 1.2;
+‎      margin-bottom: 1.2rem;
+‎      background: linear-gradient(to right, #0f3b2c, #2f6b53);
+‎      background-clip: text;
+‎      -webkit-background-clip: text;
+‎      color: transparent;
+‎    }
+‎    .hero-content p {
+‎      font-size: 1.15rem;
+‎      color: var(--muted-foreground);
+‎      max-width: 85%;
+‎      margin-bottom: 2rem;
+‎    }
+‎    .services-grid {
+‎      display: grid;
+‎      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+‎      gap: 1.8rem;
+‎      margin: 2rem 0 2rem;
+‎    }
+‎    .service-card {
+‎      background: white;
+‎      border-radius: var(--radius);
+‎      border: 1px solid var(--border);
+‎      padding: 1.8rem;
+‎      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+‎      box-shadow: var(--shadow-sm);
+‎    }
+‎    .service-card:hover {
+‎      transform: translateY(-6px);
+‎      box-shadow: var(--shadow-lg);
+‎      border-color: #d0e2d9;
+‎    }
+‎    .service-icon {
+‎      font-size: 2.2rem;
+‎      color: var(--primary);
+‎      margin-bottom: 1rem;
+‎      background: var(--primary-soft);
+‎      width: 52px;
+‎      height: 52px;
+‎      display: flex;
+‎      align-items: center;
+‎      justify-content: center;
+‎      border-radius: 18px;
+‎    }
+‎    .service-card h3 {
+‎      font-size: 1.3rem;
+‎      font-weight: 600;
+‎      margin-bottom: 0.6rem;
+‎    }
+‎
+‎    /* About section */
+‎    .about-grid {
+‎      display: grid;
+‎      grid-template-columns: 1fr 1fr;
+‎      gap: 3rem;
+‎      align-items: center;
+‎    }
+‎    .stats-row {
+‎      display: flex;
+‎      gap: 1.5rem;
+‎      margin-top: 2rem;
+‎    }
+‎    .stat-card {
+‎      background: var(--secondary);
+‎      border-radius: var(--radius-sm);
+‎      padding: 1rem 1.2rem;
+‎      text-align: center;
+‎      flex: 1;
+‎    }
+‎    .stat-number {
+‎      font-weight: 800;
+‎      font-size: 2rem;
+‎      color: var(--primary);
+‎    }
+‎    .quote-card {
+‎      background: var(--primary-soft);
+‎      border-radius: var(--radius);
+‎      padding: 2rem;
+‎      position: relative;
+‎    }
+‎
+‎    /* Contact form */
+‎    .contact-grid {
+‎      display: grid;
+‎      grid-template-columns: 1fr 1fr;
+‎      gap: 2.5rem;
+‎    }
+‎    .form-group {
+‎      margin-bottom: 1.2rem;
+‎    }
+‎    label {
+‎      font-size: 0.85rem;
+‎      font-weight: 500;
+‎      margin-bottom: 0.3rem;
+‎      display: block;
+‎    }
+‎    input, textarea {
+‎      width: 100%;
+‎      padding: 0.8rem 1rem;
+‎      border: 1px solid var(--border);
+‎      border-radius: var(--radius-sm);
+‎      font-family: inherit;
+‎      transition: 0.2s;
+‎      background: white;
+‎    }
+‎    input:focus, textarea:focus {
+‎      outline: none;
+‎      border-color: var(--primary);
+‎      box-shadow: 0 0 0 3px rgba(15, 59, 44, 0.1);
+‎    }
+‎    .contact-info-card {
+‎      background: var(--secondary);
+‎      border-radius: var(--radius);
+‎      padding: 2rem;
+‎    }
+‎    .contact-detail {
+‎      display: flex;
+‎      gap: 1rem;
+‎      align-items: center;
+‎      margin-bottom: 1.5rem;
+‎    }
+‎    footer {
+‎      border-top: 1px solid var(--border);
+‎      padding: 2.5rem 0 2rem;
+‎      background: #fbfdfc;
+‎      margin-top: 4rem;
+‎    }
+‎    @media (max-width: 850px) {
+‎      .about-grid, .contact-grid {
+‎        grid-template-columns: 1fr;
+‎      }
+‎      .hero-content h1 { font-size: 2.5rem; }
+‎      .hero-content p { max-width: 100%; }
+‎      .nav-inner { flex-direction: column; gap: 1rem; }
+‎      .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+‎      .container { padding: 0 1.2rem; }
+‎    }
+‎    .section-title {
+‎      font-size: 2.2rem;
+‎      font-weight: 700;
+‎      letter-spacing: -0.01em;
+‎      margin-bottom: 0.5rem;
+‎    }
+‎    .badge {
+‎      display: inline-block;
+‎      background: var(--primary-soft);
+‎      color: var(--primary);
+‎      border-radius: 40px;
+‎      padding: 0.2rem 1rem;
+‎      font-size: 0.8rem;
+‎      font-weight: 600;
+‎      margin-bottom: 1rem;
+‎    }
+‎    .fade-up {
+‎      animation: fadeSlideUp 0.5s ease-out;
+‎    }
+‎  </style>
+‎</head>
+‎<body>
+‎<div class="navbar">
+‎  <div class="container nav-inner">
+‎    <div class="logo">CareOne<span> Services Ltd</span></div>
+‎    <div class="nav-links">
+‎      <a href="#" data-page="home" class="nav-link active">Home</a>
+‎      <a href="#" data-page="about" class="nav-link">About</a>
+‎      <a href="#" data-page="services" class="nav-link">Services</a>
+‎      <a href="#" data-page="contact" class="nav-link">Contact</a>
+‎    </div>
+‎  </div>
+‎</div>
+‎
+‎<main>
+‎  <!-- HOME PAGE (complete) -->
+‎  <div id="page-home" class="page active-page">
+‎    <section class="hero">
+‎      <div class="container">
+‎        <div class="hero-content">
+‎          <span class="badge"><i class="fas fa-star-of-life"></i> Trusted healthcare partner</span>
+‎          <h1>Integrated excellence for <br>modern healthcare</h1>
+‎          <p>CareOne Services Ltd delivers cutting-edge hospital equipment, management consulting, specialized medical training, marketing, importation & general contracting — all under one roof.</p>
+‎          <a href="#" data-page="contact" class="btn-primary nav-link">Get in touch <i class="fas fa-arrow-right"></i></a>
+‎        </div>
+‎      </div>
+‎    </section>
+‎    <div class="container">
+‎      <div class="services-grid">
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-microscope"></i></div><h3>Hospital Equipment</h3><p>MRI, CT scanners, surgical tools, ICU beds — certified & latest generation.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Management Consultants</h3><p>Healthcare ops optimization, strategic planning & JCI readiness.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-graduation-cap"></i></div><h3>Medical Care Training</h3><p>Hands-on simulation, BLS, nursing & specialized clinical workshops.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Marketing Promotion</h3><p>Brand elevation, digital campaigns and patient outreach for hospitals.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-globe"></i></div><h3>Importation</h3><p>Seamless global sourcing of medical consumables & high-tech devices.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-hard-hat"></i></div><h3>General Contractor</h3><p>End-to-end hospital construction, renovation & medical infrastructure.</p></div>
+‎      </div>
+‎    </div>
+‎  </div>
+‎
+‎  <!-- ABOUT PAGE -->
+‎  <div id="page-about" class="page">
+‎    <div class="container" style="padding: 4rem 0 3rem;">
+‎      <div class="about-grid">
+‎        <div>
+‎          <span class="badge"><i class="fas fa-leaf"></i> Our story</span>
+‎          <h2 class="section-title">Building healthier futures</h2>
+‎          <p style="margin-bottom: 1rem;">CareOne Services Ltd was founded to bridge the gap between world-class medical innovation and local healthcare institutions. With deep expertise across six core divisions, we empower hospitals and clinics to deliver exceptional patient outcomes through integrated solutions.</p>
+‎          <p style="margin-bottom: 1.5rem;">Our multidisciplinary team of engineers, clinical trainers, and project managers works across Africa and beyond — ensuring seamless importation, installation, and operational excellence. We're not just vendors; we are long-term partners in medical infrastructure.</p>
+‎          <div class="stats-row">
+‎            <div class="stat-card"><div class="stat-number">150+</div><div>Projects Completed</div></div>
+‎            <div class="stat-card"><div class="stat-number">45+</div><div>Hospital Partners</div></div>
+‎            <div class="stat-card"><div class="stat-number">24/7</div><div>Technical Support</div></div>
+‎          </div>
+‎        </div>
+‎        <div class="quote-card">
+‎          <i class="fas fa-quote-left" style="font-size: 2rem; color: #0f3b2c; opacity: 0.4; margin-bottom: 0.8rem; display: block;"></i>
+‎          <p style="font-size: 1.05rem; font-weight: 400; margin-bottom: 1rem;">"CareOne redefined how we approach facility management — from equipment procurement to staff training, their turnkey model is unmatched."</p>
+‎          <p style="font-weight: 700;">— Dr. E. Okonkwo, CMO</p>
+‎          <hr style="margin: 1.5rem 0; border-color: rgba(0,0,0,0.05);">
+‎          <div><i class="fas fa-check-circle" style="color: #0f3b2c; margin-right: 12px;"></i> ISO 13485 certified supply chain</div>
+‎          <div style="margin-top: 12px;"><i class="fas fa-check-circle" style="color: #0f3b2c; margin-right: 12px;"></i> Strategic global vendor network</div>
+‎        </div>
+‎      </div>
+‎    </div>
+‎  </div>
+‎
+‎  <!-- SERVICES PAGE (detailed) -->
+‎  <div id="page-services" class="page">
+‎    <div class="container" style="padding: 4rem 0 2rem;">
+‎      <div style="text-align: center; max-width: 780px; margin: 0 auto 3rem;">
+‎        <span class="badge"><i class="fas fa-cogs"></i> What we deliver</span>
+‎        <h2 class="section-title">Comprehensive healthcare solutions</h2>
+‎        <p class="section-sub" style="color: var(--muted-foreground);">Tailored, end-to-end services that cover the full spectrum of medical infrastructure and hospital growth.</p>
+‎      </div>
+‎      <div class="services-grid">
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-laptop-medical"></i></div><h3>Hospital Equipment</h3><p>High-end diagnostic imaging, patient monitoring, ventilators, sterilizers, ICU & OT equipment with installation & warranty.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-simple"></i></div><h3>Management Consultants</h3><p>Lean hospital management, financial modeling, operational audits, and JCI/ISO accreditation guidance.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div><h3>Specialized Medical Training</h3><p>Custom programs in emergency medicine, critical care nursing, equipment handling & simulation labs.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-bullhorn"></i></div><h3>Marketing Promotion</h3><p>Healthcare branding, reputation management, digital patient acquisition & medical tourism strategies.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-ship"></i></div><h3>Importation</h3><p>End-to-end logistics, customs clearance, warehousing, and regulatory compliance for medical devices & supplies.</p></div>
+‎        <div class="service-card"><div class="service-icon"><i class="fas fa-draw-polygon"></i></div><h3>General Contractor</h3><p>Construction of new hospitals, modular operating theaters, medical gas systems, and full-scale renovations.</p></div>
+‎      </div>
+‎      <div style="margin-top: 3rem; background: linear-gradient(120deg, #f1f9f4, #ffffff); border-radius: var(--radius); padding: 2rem; text-align: center; border: 1px solid #e0ede7;">
+‎        <i class="fas fa-handshake" style="font-size: 2rem; color: #0f3b2c; margin-bottom: 0.5rem;"></i>
+‎        <h3 style="margin: 0.5rem 0;">Integrated approach, single accountability</h3>
+‎        <p style="max-width: 600px; margin: 0 auto;">From equipment and training to construction — we streamline every phase. Request a custom proposal.</p>
+‎        <a href="#" data-page="contact" class="btn-primary nav-link" style="margin-top: 1.2rem;">Partner with us →</a>
+‎      </div>
+‎    </div>
+‎  </div>
+‎
+‎  <!-- CONTACT PAGE -->
+‎  <div id="page-contact" class="page">
+‎    <div class="container" style="padding: 4rem 0 2rem;">
+‎      <div style="margin-bottom: 2rem;">
+‎        <span class="badge"><i class="fas fa-envelope-open-text"></i> Reach out</span>
+‎        <h2 class="section-title">Let's start a conversation</h2>
+‎        <p class="section-sub" style="max-width: 650px;">Whether you need new hospital equipment, consultancy, training, or contracting — our team is ready to assist within 24h.</p>
+‎      </div>
+‎      <div class="contact-grid">
+‎        <div>
+‎          <form id="contactFormModern" action="#" method="post">
+‎            <div class="form-group"><label>Full name *</label><input type="text" id="fullname" placeholder="John O. Doe" required></div>
+‎            <div class="form-group"><label>Email address *</label><input type="email" id="emailAddr" placeholder="hello@careone.com" required></div>
+‎            <div class="form-group"><label>Service of interest</label><input type="text" id="serviceInterest" placeholder="e.g., Hospital Equipment / Training / Construction"></div>
+‎            <div class="form-group"><label>Message *</label><textarea rows="4" id="msgContent" placeholder="Tell us about your project or inquiry..."></textarea></div>
+‎            <button type="submit" class="btn-primary" id="sendMsgBtn"><i class="fas fa-paper-plane"></i> Send message</button>
+‎            <div id="formMsgFeedback" style="margin-top: 1rem; font-size: 0.85rem;"></div>
+‎          </form>
+‎        </div>
+‎        <div class="contact-info-card">
+‎          <div class="contact-detail"><i class="fas fa-map-marker-alt fa-fw" style="font-size: 1.3rem;"></i><span>14 Medical District, Lekki Phase 1, Lagos, Nigeria</span></div>
+‎          <div class="contact-detail"><i class="fas fa-phone-alt fa-fw"></i><span>+234 (0) 802 345 6789</span></div>
+‎          <div class="contact-detail"><i class="fas fa-envelope fa-fw"></i><span>hello@careoneservices.com</span></div>
+‎          <div class="contact-detail"><i class="fas fa-clock fa-fw"></i><span>Mon – Fri: 8:00 AM – 6:00 PM (WAT)</span></div>
+‎          <hr style="margin: 1.5rem 0;">
+‎          <p><i class="fab fa-linkedin" style="margin-right: 8px;"></i> <strong>CareOne Services Ltd</strong> — global healthcare insights</p>
+‎          <div style="margin-top: 1rem; display: flex; gap: 1rem;"><i class="fab fa-twitter"></i> <i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i></div>
+‎        </div>
+‎      </div>
+‎    </div>
+‎  </div>
+‎</main>
+‎
+‎<footer>
+‎  <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+‎    <div><div class="logo" style="margin-bottom: 0.3rem;">CareOne<span> Services Ltd</span></div><p class="copyright" style="font-size: 0.8rem; color: #5b6e8c;">© 2025 — Integrated healthcare solutions</p></div>
+‎    <div><p style="font-weight: 500;">Explore</p><ul style="list-style: none; margin-top: 0.5rem;"><li><a href="#" data-page="home" class="nav-link" style="color:#475569;">Home</a></li><li><a href="#" data-page="about" class="nav-link" style="color:#475569;">About</a></li><li><a href="#" data-page="services" class="nav-link" style="color:#475569;">Services</a></li><li><a href="#" data-page="contact" class="nav-link" style="color:#475569;">Contact</a></li></ul></div>
+‎    <div><p style="font-weight: 500;">Core services</p><p style="font-size: 0.8rem; max-width: 260px;">Hospital Equipment · Management Consultants · Medical Training · Marketing · Importation · General Contractor</p></div>
+‎  </div>
+‎</footer>
 
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: #ffffff;
-      color: #0a0c10;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
-
-    /* Shadcn inspired variables: neutral, border radius, subtle shadows */
-    :root {
-      --background: #ffffff;
-      --foreground: #09090b;
-      --card: #ffffff;
-      --card-foreground: #09090b;
-      --primary: #0f3b2c;
-      --primary-foreground: #fafafa;
-      --secondary: #f4f4f5;
-      --secondary-foreground: #18181b;
-      --muted: #f4f4f5;
-      --muted-foreground: #71717a;
-      --accent: #e6f0ec;
-      --accent-foreground: #0f3b2c;
-      --border: #e4e4e7;
-      --ring: #0f3b2c;
-      --radius: 0.75rem;
-      --radius-sm: 0.5rem;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Navigation */
-    .navbar {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width: 100%;
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 1rem 0;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #0f3b2c 0%, #1c6e4a 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .logo span {
-      color: #0f3b2c;
-      background: none;
-      -webkit-background-clip: unset;
-      background-clip: unset;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 500;
-      color: var(--foreground);
-      transition: color 0.2s;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: #0f3b2c;
-    }
-
-    /* Buttons & cards (shad-inspired) */
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--primary);
-      color: white;
-      border-radius: calc(var(--radius) - 0.125rem);
-      padding: 0.6rem 1.25rem;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      gap: 0.5rem;
-    }
-    .btn-primary:hover {
-      background-color: #0a2e22;
-      transform: translateY(-1px);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: calc(var(--radius) - 0.125rem);
-      padding: 0.6rem 1.25rem;
-      font-weight: 500;
-      transition: all 0.2s;
-      text-decoration: none;
-      color: var(--foreground);
-    }
-    .btn-outline:hover {
-      background: var(--secondary);
-      border-color: var(--primary);
-    }
-
-    /* Hero & sections */
-    .hero {
-      padding: 5rem 0 4rem;
-      background: linear-gradient(145deg, #fefefe 0%, #f9fafb 100%);
-    }
-    .hero-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-    .hero-content h1 {
-      font-size: 3.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 1.25rem;
-    }
-    .hero-content p {
-      font-size: 1.125rem;
-      color: var(--muted-foreground);
-      max-width: 85%;
-      margin-bottom: 2rem;
-    }
-    .highlight {
-      color: #0f3b2c;
-    }
-
-    /* Services grid */
-    .section-title {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-    }
-    .section-sub {
-      color: var(--muted-foreground);
-      margin-bottom: 2.5rem;
-      max-width: 700px;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.75rem;
-    }
-    .service-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      transition: all 0.25s ease;
-    }
-    .service-card:hover {
-      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
-      transform: translateY(-3px);
-      border-color: #d4e0db;
-    }
-    .service-icon {
-      font-size: 2rem;
-      color: #0f3b2c;
-      margin-bottom: 1rem;
-    }
-    .service-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .service-card p {
-      color: var(--muted-foreground);
-      font-size: 0.9rem;
-    }
-
-    /* About section */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    .about-stats {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .stat {
-      background: var(--secondary);
-      border-radius: var(--radius-sm);
-      padding: 1rem 1.2rem;
-      text-align: center;
-    }
-    .stat-number {
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: var(--primary);
-    }
-
-    /* Contact form */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 0.7rem 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 0.9rem;
-      transition: 0.15s;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      ring: 2px solid var(--ring);
-      box-shadow: 0 0 0 2px rgba(15, 59, 44, 0.1);
-    }
-    .contact-info {
-      background: var(--secondary);
-      border-radius: var(--radius);
-      padding: 2rem;
-    }
-    .contact-detail {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 0 2rem;
-      background: #fcfcfd;
-      margin-top: 4rem;
-    }
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .copyright {
-      color: var(--muted-foreground);
-      font-size: 0.85rem;
-    }
-
-    /* responsive */
-    @media (max-width: 860px) {
-      .about-grid, .contact-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-content p {
-        max-width: 100%;
-      }
-      .nav-inner {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .nav-links {
-        gap: 1.25rem;
-        justify-content: center;
-      }
-      .hero-content h1 {
-        font-size: 2.4rem;
-      }
-    }
-    .page {
-      display: none;
-    }
-    .page.active-page {
-      display: block;
-    }
-    .cursor-pointer {
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-<div class="navbar">
-  <div class="container nav-inner">
-    <div class="logo">CareOne<span> Services Ltd</span></div>
-    <div class="nav-links">
-      <a href="#" data-nav="home" class="nav-link active">Home</a>
-      <a href="#" data-nav="about" class="nav-link">About</a>
-      <a href="#" data-nav="services" class="nav-link">Services</a>
-      <a href="#" data-nav="contact" class="nav-link">Contact</a>
-    </div>
-  </div>
-</div>
-
-<main>
-  <!-- HOME PAGE -->
-  <div id="home-page" class="page active-page">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <h1>Integrated excellence for <span class="highlight">healthcare & beyond</span></h1>
-          <p>CareOne Services Ltd delivers world-class hospital equipment, management consulting, specialized training, marketing, importation, and general contracting — unified under modern expertise.</p>
-          <a href="#" data-nav="contact" class="btn-primary nav-link" style="display: inline-flex;">Get in touch <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </section>
-
-    <div class="container" style="margin-top: 2rem; margin-bottom: 4rem;">
-      <div class="services-grid">
-        <div class="service-card"><div class="service-icon"><i class="fas fa-microscope"></i></div><h3>Hospital Equipment</h3><p>Cutting-edge diagnostic, surgical, and patient care technology from global leaders.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Management Consultants</h3><p>Operational excellence, workflow optimization, and healthcare facility transformation.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-graduation-cap"></i></div><h3>Medical Care Training</h3><p>Specialized clinical & soft-skills programs for nursing, paramedics, and admin staff.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Marketing Promotion</h3><p>Strategic healthcare marketing, brand elevation, and patient outreach campaigns.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-globe"></i></div><h3>Importation</h3><p>Seamless worldwide sourcing of medical devices, spare parts, and consumables.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-hard-hat"></i></div><h3>General Contractor</h3><p>End-to-end hospital construction, renovation, and infrastructure build-out.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ABOUT PAGE -->
-  <div id="about-page" class="page">
-    <div class="container" style="padding: 4rem 0 3rem;">
-      <div class="about-grid">
-        <div>
-          <span style="font-size: 0.85rem; font-weight: 600; color: #0f3b2c; letter-spacing: 1px;">WHO WE ARE</span>
-          <h2 class="section-title" style="margin-top: 0.5rem;">Reliable partner for health infrastructure</h2>
-          <p style="margin-bottom: 1rem;">CareOne Services Ltd was founded to bridge the gap between advanced medical technology and local healthcare institutions. With a stronghold in hospital equipment supply, management consultancy, and specialized training, we empower medical facilities to deliver superior patient outcomes.</p>
-          <p style="margin-bottom: 1rem;">Our multi-disciplinary team includes clinical engineers, healthcare strategists, and logistics experts. We handle importation compliance and act as prime general contractors for medical projects — from greenfield hospitals to ICU renovations.</p>
-          <div class="about-stats">
-            <div class="stat"><div class="stat-number">120+</div><div style="font-size: 0.8rem;">Projects delivered</div></div>
-            <div class="stat"><div class="stat-number">35+</div><div style="font-size: 0.8rem;">Partner hospitals</div></div>
-            <div class="stat"><div class="stat-number">24/7</div><div style="font-size: 0.8rem;">Support network</div></div>
-          </div>
-        </div>
-        <div style="background: var(--accent); border-radius: var(--radius); padding: 2rem;">
-          <i class="fas fa-quote-left" style="font-size: 2rem; color: #0f3b2c; opacity: 0.5; margin-bottom: 0.5rem; display: inline-block;"></i>
-          <p style="font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem;">"CareOne redefined our operational standards — from equipment procurement to staff training, they delivered excellence."</p>
-          <p style="font-weight: 500;">— Dr. Amara N., Regional Director</p>
-          <hr style="margin: 1.5rem 0; border-color: rgba(0,0,0,0.05);">
-          <div><i class="fas fa-check-circle" style="color: #0f3b2c; margin-right: 10px;"></i> ISO & CE certified supply chain</div>
-          <div style="margin-top: 0.5rem;"><i class="fas fa-check-circle" style="color: #0f3b2c; margin-right: 10px;"></i> Over 15 years of combined expertise</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SERVICES PAGE (detailed) -->
-  <div id="services-page" class="page">
-    <div class="container" style="padding: 4rem 0 2rem;">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
-        <h2 class="section-title">What we deliver</h2>
-        <p class="section-sub">Comprehensive solutions tailored to the healthcare industry’s most complex demands. From advanced devices to turnkey construction.</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card"><div class="service-icon"><i class="fas fa-laptop-medical"></i></div><h3>Hospital Equipment</h3><p>MRI, CT scanners, ventilators, monitors, surgical tables, and sterilization systems. Full installation & maintenance.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-simple"></i></div><h3>Management Consultants</h3><p>Lean hospital management, revenue cycle optimization, JCI readiness, and strategic planning frameworks.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div><h3>Specialized Medical Training</h3><p>Emergency response, ICU protocols, nursing excellence, and simulation-based workshops for clinicians.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-bullhorn"></i></div><h3>Marketing Promotion</h3><p>Healthcare marketing strategies, patient acquisition, brand positioning, and digital campaigns for medical centers.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-ship"></i></div><h3>Importation</h3><p>Global sourcing of FDA/CE medical goods, logistics clearance, warehousing, and vendor management.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-draw-polygon"></i></div><h3>General Contractor</h3><p>New hospital construction, expansion projects, modular OT builds, MEP, and medical gas pipeline systems.</p></div>
-      </div>
-    </div>
-    <!-- extra callout -->
-    <div class="container" style="margin: 2rem auto 3rem;">
-      <div style="background: var(--secondary); border-radius: var(--radius); padding: 2rem; text-align: center;">
-        <i class="fas fa-handshake" style="font-size: 2rem; margin-bottom: 1rem; color: #0f3b2c;"></i>
-        <h3 style="margin-bottom: 0.5rem;">Integrated solutions, single point of contact</h3>
-        <p style="max-width: 700px; margin: 0 auto;">We merge equipment, consultancy, training, and construction — seamlessly. Get bespoke healthcare packages.</p>
-        <a href="#" data-nav="contact" class="btn-primary nav-link" style="margin-top: 1.2rem; display: inline-flex;">Discuss your project</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- CONTACT PAGE -->
-  <div id="contact-page" class="page">
-    <div class="container" style="padding: 4rem 0 2rem;">
-      <div style="margin-bottom: 2rem;">
-        <h2 class="section-title">Let’s connect</h2>
-        <p class="section-sub">Reach out for inquiries about equipment, partnerships, training, or contractor bids. Our team replies within 24 hours.</p>
-      </div>
-      <div class="contact-grid">
-        <div>
-          <form id="contactForm" action="#" method="post">
-            <div class="form-group">
-              <label>Full name</label>
-              <input type="text" id="name" placeholder="John Doe" required>
-            </div>
-            <div class="form-group">
-              <label>Email address</label>
-              <input type="email" id="email" placeholder="hello@careone.com" required>
-            </div>
-            <div class="form-group">
-              <label>Service interest</label>
-              <input type="text" id="subject" placeholder="Hospital Equipment / Training / Contracting...">
-            </div>
-            <div class="form-group">
-              <label>Message</label>
-              <textarea rows="4" id="message" placeholder="Tell us about your requirements..."></textarea>
-            </div>
-            <button type="submit" class="btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Send message</button>
-            <p id="formFeedback" style="margin-top: 0.8rem; font-size: 0.85rem;"></p>
-          </form>
-        </div>
-        <div class="contact-info">
-          <div class="contact-detail"><i class="fas fa-map-marker-alt" style="font-size: 1.3rem; width: 1.8rem;"></i><span>12 Healthcare Avenue, Victoria Island, Lagos, Nigeria</span></div>
-          <div class="contact-detail"><i class="fas fa-phone-alt"></i><span>+234 (0) 123 456 7890</span></div>
-          <div class="contact-detail"><i class="fas fa-envelope"></i><span>contact@careoneservices.com</span></div>
-          <div class="contact-detail"><i class="fas fa-clock"></i><span>Mon - Fri: 8:00 AM – 6:00 PM (GMT+1)</span></div>
-          <hr style="margin: 1rem 0;">
-          <p><i class="fab fa-linkedin"></i> <strong>CareOne Services Ltd</strong> — follow us for industry insights</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="container footer-grid">
-    <div>
-      <div class="logo" style="margin-bottom: 0.5rem;">CareOne<span> Services Ltd</span></div>
-      <p class="copyright">© 2025 CareOne Services Ltd. <br>Innovation for healthier tomorrows.</p>
-    </div>
-    <div>
-      <p style="font-weight: 500;">Quick links</p>
-      <ul style="list-style: none; margin-top: 0.5rem;">
-        <li><a href="#" data-nav="home" class="nav-link" style="text-decoration: none; color: #52525b;">Home</a></li>
-        <li><a href="#" data-nav="about" class="nav-link" style="text-decoration: none; color: #52525b;">About</a></li>
-        <li><a href="#" data-nav="services" class="nav-link" style="text-decoration: none; color: #52525b;">Services</a></li>
-        <li><a href="#" data-nav="contact" class="nav-link" style="text-decoration: none; color: #52525b;">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <p style="font-weight: 500;">Specialties</p>
-      <p style="font-size: 0.85rem; color: #52525b;">Hospital Equipment · Management Consulting · Medical Training · Marketing · Importation · General Contracting</p>
-    </div>
-  </div>
-</footer>
-
-‎<script>
-‎  // page navigation logic
-‎  const pages = {
-‎    home: document.getElementById('home-page'),
-‎    about: document.getElementById('about-page'),
-‎    services: document.getElementById('services-page'),
-‎    contact: document.getElementById('contact-page')
-‎  };
-‎  
-‎  const navLinks = document.querySelectorAll('.nav-link');
-‎  
-‎  function setActivePage(pageId) {
-‎    // hide all pages
-‎    Object.values(pages).forEach(page => {
-‎      if(page) page.classList.remove('active-page');
-‎    });
-‎    const activePage = pages[pageId];
-‎    if(activePage) activePage.classList.add('active-page');
-‎    
-‎    // update active class on nav links
-‎    navLinks.forEach(link => {
-‎      const linkPage = link.getAttribute('data-nav');
-‎      if(linkPage === pageId) {
-‎        link.classList.add('active');
-‎      } else {
-‎        link.classList.remove('active');
-‎      }
-‎    });
-‎    
-‎    // update browser hash without jumping
-‎    history.pushState(null, '', `#${pageId}`);
-‎  }
-‎  
-‎  function handleNavClick(e) {
-‎    e.preventDefault();
-‎    const pageId = this.getAttribute('data-nav');
-‎    if(pageId && pages[pageId]) {
-‎      setActivePage(pageId);
-‎      window.scrollTo({ top: 0, behavior: 'smooth' });
-‎    }
-‎  }
-‎  
-‎  navLinks.forEach(link => {
-‎    link.addEventListener('click', handleNavClick);
-‎  });
-‎  
-‎  // initial check for hash on load
-‎  function checkHash() {
-‎    const hash = window.location.hash.substring(1);
-‎    if(hash && pages[hash]) {
-‎      setActivePage(hash);
-‎    } else {
-‎      setActivePage('home');
-‎    }
-‎  }
-‎  window.addEventListener('popstate', () => {
-‎    const hash = window.location.hash.substring(1);
-‎    if(hash && pages[hash]) setActivePage(hash);
-‎    else setActivePage('home');
-‎  });
-‎  checkHash();
-‎  
-‎  // Contact form simple handling with modern feedback
-‎  const contactForm = document.getElementById('contactForm');
-‎  const feedback = document.getElementById('formFeedback');
-‎  if(contactForm){
-‎    contactForm.addEventListener('submit', function(e){
-‎      e.preventDefault();
-‎      const name = document.getElementById('name')?.value.trim();
-‎      const email = document.getElementById('email')?.value.trim();
-‎      const message = document.getElementById('message')?.value.trim();
-‎      if(!name || !email || !message){
-‎        feedback.innerHTML = '<span style="color:#b91c1c;">⚠️ Please fill in name, email and message.</span>';
-‎        return;
-‎      }
-‎      if(!email.includes('@') || !email.includes('.')){
-‎        feedback.innerHTML = '<span style="color:#b91c1c;">⚠️ Enter a valid email address.</span>';
-‎        return;
-‎      }
-‎      // simulate submit
-‎      feedback.innerHTML = '<span style="color:#0f3b2c;"><i class="fas fa-spinner fa-pulse"></i> Sending...</span>';
-‎      setTimeout(() => {
-‎        feedback.innerHTML = '<span style="color:#0f3b2c;">✓ Thanks! A CareOne representative will get back to you shortly.</span>';
-‎        contactForm.reset();
-‎        setTimeout(() => { feedback.innerHTML = ''; }, 4000);
-‎      }, 800);
-‎    });
-‎  }
+  <script>
+‎  // SPA style page navigation with animations and independent pages
+‎  const pagesMap = {
+‎    home: document.getElementById('page-home'),
+‎    about: document.getElementById('page-about'),
+‎    services: document.getElementById('page-services'),
+‎    contact: document.getElementById('page-contact')
+‎  };
+‎  
+‎  const navButtons = document.querySelectorAll('.nav-link');
+‎  
+‎  function activatePage(pageId) {
+‎    // hide all pages with smooth removal
+‎    Object.values(pagesMap).forEach(page => {
+‎      if(page) page.classList.remove('active-page');
+‎    });
+‎    const target = pagesMap[pageId];
+‎    if(target) {
+‎      target.classList.add('active-page');
+‎    }
+‎    // update active class on nav
+‎    navButtons.forEach(btn => {
+‎      const pageAttr = btn.getAttribute('data-page');
+‎      if(pageAttr === pageId) {
+‎        btn.classList.add('active');
+‎      } else {
+‎        btn.classList.remove('active');
+‎      }
+‎    });
+‎    // update URL hash without jump
+‎    history.pushState(null, '', `#${pageId}`);
+‎    window.scrollTo({ top: 0, behavior: 'smooth' });
+‎  }
+‎  
+‎  function onNavClick(e) {
+‎    e.preventDefault();
+‎    const page = this.getAttribute('data-page');
+‎    if(page && pagesMap[page]) {
+‎      activatePage(page);
+‎    }
+‎  }
+‎  
+‎  navButtons.forEach(btn => {
+‎    btn.addEventListener('click', onNavClick);
+‎  });
+‎  
+‎  // Hash change handler for direct linking
+‎  function handleHashChange() {
+‎    let hash = window.location.hash.substring(1);
+‎    if(hash && pagesMap[hash]) {
+‎      activatePage(hash);
+‎    } else if(!hash || !pagesMap[hash]) {
+‎      activatePage('home');
+‎    }
+‎  }
+‎  window.addEventListener('popstate', handleHashChange);
+‎  handleHashChange();
+‎  
+‎  // Contact form handler with modern feedback
+‎  const contactForm = document.getElementById('contactFormModern');
+‎  if(contactForm) {
+‎    contactForm.addEventListener('submit', function(e) {
+‎      e.preventDefault();
+‎      const name = document.getElementById('fullname')?.value.trim();
+‎      const email = document.getElementById('emailAddr')?.value.trim();
+‎      const message = document.getElementById('msgContent')?.value.trim();
+‎      const feedbackDiv = document.getElementById('formMsgFeedback');
+‎      
+‎      if(!name || !email || !message) {
+‎        feedbackDiv.innerHTML = '<span style="color:#b91c1c;"><i class="fas fa-exclamation-circle"></i> Please fill in name, email and message.</span>';
+‎        return;
+‎      }
+‎      if(!email.includes('@') || !email.includes('.')) {
+‎        feedbackDiv.innerHTML = '<span style="color:#b91c1c;"><i class="fas fa-envelope"></i> Enter a valid email address.</span>';
+‎        return;
+‎      }
+‎      feedbackDiv.innerHTML = '<span style="color:#0f3b2c;"><i class="fas fa-spinner fa-pulse"></i> Sending request...</span>';
+‎      setTimeout(() => {
+‎        feedbackDiv.innerHTML = '<span style="color:#0f3b2c;"><i class="fas fa-check-circle"></i> Thank you! A CareOne specialist will respond within 24 hours.</span>';
+‎        contactForm.reset();
+‎        setTimeout(() => { feedbackDiv.innerHTML = ''; }, 5000);
+‎      }, 800);
+‎    });
+‎  }
+‎  
+‎  // Additional entrance animations for service cards on visible pages
+‎  const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+‎  const observer = new IntersectionObserver((entries) => {
+‎    entries.forEach(entry => {
+‎      if(entry.isIntersecting) {
+‎        entry.target.style.opacity = "1";
+‎        entry.target.style.transform = "translateY(0)";
+‎        observer.unobserve(entry.target);
+‎      }
+‎    });
+‎  }, observerOptions);
+‎  
+‎  document.querySelectorAll('.service-card, .stat-card, .quote-card').forEach(el => {
+‎    el.style.opacity = "0";
+‎    el.style.transform = "translateY(12px)";
+‎    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+‎    observer.observe(el);
+‎  });
+‎  
+‎  // fix any initial visible cards after page switch also recalc
+‎  function reObserveNewCards() {
+‎    document.querySelectorAll('.service-card, .stat-card, .quote-card').forEach(el => {
+‎      if(!el.style.opacity || el.style.opacity === "0") {
+‎        observer.observe(el);
+‎      }
+‎    });
+‎  }
+‎  const originalActivate = activatePage;
+‎  window.activatePage = function(pageId) {
+‎    originalActivate(pageId);
+‎    setTimeout(reObserveNewCards, 100);
+‎  };
+‎  activatePage = function(pageId) {
+‎    Object.values(pagesMap).forEach(page => {
+‎      if(page) page.classList.remove('active-page');
+‎    });
+‎    const target = pagesMap[pageId];
+‎    if(target) target.classList.add('active-page');
+‎    navButtons.forEach(btn => {
+‎      const pageAttr = btn.getAttribute('data-page');
+‎      if(pageAttr === pageId) btn.classList.add('active');
+‎      else btn.classList.remove('active');
+‎    });
+‎    history.pushState(null, '', `#${pageId}`);
+‎    window.scrollTo({ top: 0, behavior: 'smooth' });
+‎    setTimeout(reObserveNewCards, 120);
+‎  };
+‎  window.activatePage = activatePage;
+‎  const originalNav = onNavClick;
+‎  document.querySelectorAll('.nav-link').forEach(btn => {
+‎    btn.removeEventListener('click', onNavClick);
+‎    btn.addEventListener('click', (e) => {
+‎      e.preventDefault();
+‎      const page = btn.getAttribute('data-page');
+‎      if(page && pagesMap[page]) activatePage(page);
+‎    });
+‎  });
+‎  handleHashChange();
+‎  setTimeout(reObserveNewCards, 200);
 ‎</script>
-‎<style>
-‎  .nav-link.active {
-‎    color: #0f3b2c;
-‎    font-weight: 600;
-‎    border-bottom: 2px solid #0f3b2c;
-‎    padding-bottom: 2px;
-‎  }
-‎  .service-card p, .hero-content p {
-‎    line-height: 1.5;
-‎  }
-‎  a {
-‎    text-decoration: none;
-‎  }
-‎  .btn-primary, .btn-outline {
-‎    transition: all 0.2s ease;
-‎  }
-‎  ::selection {
-‎    background: #cfe6df;
-‎  }
-‎</style>
 ‎</body>
 ‎</html>
